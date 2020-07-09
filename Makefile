@@ -1,14 +1,22 @@
 files = hello.* test.cpp
 bin = app
-all: say_hello generate
+cc = g++ -Wall
 
-say_hello:
-	@echo "Hello world!"
+all: compile run
 
-generate:
-	@echo "Creating files"
-	touch code.py
+compile:
+	@clear
+	@$(cc) $(files) -o $(bin)
+
+run:
+	@./$(bin)
 
 clean:
-	@echo "Cleaning files"
-	rm code.py
+	@rm $(bin) 
+	
+git-am:
+	@git add $(files)
+	@git commit -m "$(files)"
+
+git-push:
+	@git push -u origin master
