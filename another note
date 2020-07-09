@@ -1,0 +1,81 @@
+# https://www.cprogramming.com/tutorial/makefiles.html
+# A makefile is simply a way of associating short names,
+# called targets, with a series of commands to execute when
+# the action is requested.
+
+# `make`, execute the default target(goal), usually also the
+# first target
+# `make clean`, executes a particular target called clean
+
+# a makefile may have macros and targets
+# Macros are useful in the same way constants are
+# Macros allow you to quickly change major facets of your program
+# that appear in multiple places.
+# For instance, you can create a macro to substitute the name of
+# your compiler. Then if you move from using gcc to another compiler,
+# you can quickly change your builds with only a one-line change.
+
+# use `#` to create a comment
+# so far all the above are comments
+
+# macros are written using x=y form. This sets your c++ compiler
+# set some options
+#CC = g++
+#OPT  = -Wall
+
+# let add the option and the compiler together
+#COMP = $(CC) $(OPT)
+
+# to use the macro, you pass the name into `()` as $(CC)
+# consider the line (comment) below for compiling a cpp code
+# and executing it
+#compile:
+#	@$(CC) hello.cpp
+#	@./a.out
+
+# targets are what the makefile does, like functions
+# generally a target is written as:
+#target: [dependencies]
+#	command 1
+#	command 2
+#	command ..n
+
+# the above, before the target is a simple example of target
+# lets create a target that will just compile source to object
+#CC = g++ -Wall
+#SRC_FILE = hello.cpp test.cpp
+#BIN_FILE = ./app
+#all: build test
+#build: $(SRC_FILE)
+#	@$(CC) -o $(BIN_FILE) $(SRC_FILE)
+#test: $(BIN_FILE)
+#	@$(BIN_FILE)
+#clean: $(BIN_FILE)
+#	@rm $(BIN_FILE)
+#	@echo "removed binary"
+
+# there are special macros and they begin with a `$` sign
+
+# $@ is the name of the target
+# consider the sample below where, `$@` is the name of the target
+# but also used as the object name of the compiled file
+#CC = g++
+#F = client.cpp
+#client: $(F)
+#	$(CC) $(F) -o $@
+
+# $? stores the list of dependents more recent than the target
+#client: client.cpp
+#	g++ $? -0 $@
+#	./$@
+
+# $^ gives you all dependencies, regardless of whether they are
+# more recent than the target. Duplicate names, however, will
+# be removed. ma write this code as above
+
+# $+ is like $^, but it keeps duplicates and gives you the entire
+# list of dependencies in the order they appear.
+
+# $< gives the first dependency
+
+
