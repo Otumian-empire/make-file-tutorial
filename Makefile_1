@@ -1,0 +1,28 @@
+# moving away from the basics
+
+# compile with the g++ compiler
+cc = g++
+
+
+# compile and execute when make is called
+all: compile execute
+
+
+# compile target
+compile: hello.cpp
+	@echo "compiling source"
+	@${cc} hello.cpp -o app
+	@echo "source compiled"
+
+# execute target
+execute: app
+	@echo "executing source"
+	@./app
+	@echo "source executed"
+
+
+# clean target - removes hello.cpp and ./app
+# but let's just rm the binary
+clean: hello.cpp ./app
+	@echo "removing files"
+	@rm ./app
